@@ -29,13 +29,21 @@ def pdf_generator(title, year, month, child_name, authored, logo_path, logo_name
     pdf.add_page()
 
     # ======================= first page ==============================
-    pdf.set_font("arial", "B", 28.0)
-    pdf.image('images/image.jpg', x=0, y=0, w=210, h=297)
-    # 1- add pdf title
-    pdf.set_text_color(0, 0, 150)
-    pdf.set_xy(20, 35)
-    # title = "Example of title"
-    pdf.cell(20, 10, txt=title, ln=1, align='L')
+    # Set the font and font size
+    pdf.set_font('Arial', size=12)
+
+    # Get the width of the text
+    text_width = pdf.get_string_width("Hello, world!")
+
+    # Calculate the x-coordinate for centering the text
+    x = (pdf.w - text_width) / 2
+
+    # Set the x-coordinate and y-coordinate for the cell
+    y = pdf.h / 2
+    pdf.set_xy(x, y)
+
+    # Add the text to the cell
+    pdf.cell(text_width, 0, "Hello, world!", align='C')
 
     # add year + line
     pdf.set_xy(20, 55)
